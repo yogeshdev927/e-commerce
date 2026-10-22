@@ -7,6 +7,9 @@ import Promo from './components/Promo'
 import Features from './components/Features'
 import Press from './components/Press'
 import Reviews from './components/Reviews'
+import Gallery from './components/Gallery'
+import Newsletter from './components/Newsletter'
+import Footer from './components/Footer'
 
 const App = () => {
   return (
@@ -19,6 +22,9 @@ const App = () => {
     <Features />
     <Press />
     <Reviews />
+    <Gallery />
+    <Newsletter />
+    <Footer />
     </>
   )
 }
