@@ -51,7 +51,7 @@ const products = [
 
 const tabs = ["All", "Best Sellers", "New Releases", "Award Winners"];
 
-const Product = () => {
+function Product({onAddToCart}) {
 
     // Ab tak kaunsa tab selected hai, ye React ko yaad rakhna hai
     const [activeTab, setActiveTab] = useState("All")
@@ -92,7 +92,7 @@ const Product = () => {
             {/* Product grid */}
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {visibleProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                    <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
                 ))}
             </div>
         </div>

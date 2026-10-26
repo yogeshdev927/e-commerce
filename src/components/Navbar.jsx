@@ -10,7 +10,7 @@ const navLinks = [
   { id: 6, label: "Sale", dropdown: false },
 ];
 
-function Navbar() {
+function Navbar({cartCount}) {
   const [active, setActive] = useState("New Arrivals")
   const [menuOpen, setMenuOpen] = useState(false)
   return (
@@ -76,9 +76,11 @@ function Navbar() {
             {/* Bag */}
             <button aria-label="Shopping bag" className="relative text-stone-700">
               <ShoppingBag size={18} />
-              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[9px] font-semibold text-white">
-                1
-              </span>
+              {cartCount > 0 &&(
+                <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[9px] font-semibold text-white">
+                  {cartCount}
+                </span>
+              )}
             </button>
             {/* Avatar */}
             <div className="hidden h-8 w-8 items-center justify-center rounded-full bg-stone-200 text-xs font-semibold text-stone-700 sm:flex">

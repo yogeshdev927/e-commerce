@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function ProductCard({ product }) {
+function ProductCard({ product, onAddToCart }) {
     // Har card ki apni alag state: wishlist mein hai ya nahi
     const [liked, setLiked] = useState(false)
   return (
@@ -50,7 +50,7 @@ function ProductCard({ product }) {
                     </span>
                 )}
           </div>
-          <button className="rounded-md bg-stone-900 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-stone-700">
+          <button onClick={onAddToCart} className="rounded-md bg-stone-900 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-stone-700">
             Add to Bag
           </button>
         </div>
