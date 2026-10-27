@@ -17,14 +17,25 @@ const App = () => {
 
   const handleAddToCart = () => {
     setCartCount((prev) => prev+1);
-  }
+  };
 
+   // ---------- Wishlist ----------
+  // Yahan sirf un products ki id rakhte hain jo like kiye hain
+  const [wishlist, setWishlist] = useState([])
+
+  const handleToggleWishlist = (productId) => {
+    setWishlist((prev)=>
+      prev.includes(productId) ? prev.filter((id) => id !== productId)// pehle se hai -> hata do
+      :[...prev, productId]// nahi hai -> jod do
+    )
+  }
+  console.log("App render, wishlist =", wishlist);
   return (
     <>
-    <Navbar cartCount={cartCount} />
+    <Navbar cartCount={cartCount} wishlistCount={wishlist.length} />
     <Hero />
     <Categories />
-    <Product onAddToCart={handleAddToCart} />
+    <Product onAddToCart={handleAddToCart} wishlist={wishlist} onToggleWishlist={handleToggleWishlist} />
     <Promo />
     <Features />
     <Press />

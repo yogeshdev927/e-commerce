@@ -10,7 +10,7 @@ const navLinks = [
   { id: 6, label: "Sale", dropdown: false },
 ];
 
-function Navbar({cartCount}) {
+function Navbar({cartCount, wishlistCount}) {
   const [active, setActive] = useState("New Arrivals")
   const [menuOpen, setMenuOpen] = useState(false)
   return (
@@ -69,9 +69,11 @@ function Navbar({cartCount}) {
             {/* Wishlist */}
             <button aria-label="Wishlist" className="relative text-stone-700">
               <Heart size={18} />
-              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[9px] font-semibold text-white">
-                2
-              </span>
+              {wishlistCount > 0 &&(
+                <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[9px] font-semibold text-white">
+                  {wishlistCount}
+                </span>
+              )}
             </button>
             {/* Bag */}
             <button aria-label="Shopping bag" className="relative text-stone-700">

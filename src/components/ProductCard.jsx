@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-function ProductCard({ product, onAddToCart }) {
-    // Har card ki apni alag state: wishlist mein hai ya nahi
-    const [liked, setLiked] = useState(false)
+function ProductCard({ product, onAddToCart, isLiked, onToggleWishlist }) {
+
   return (
     <div className="flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white">
         {/* Image area */}
@@ -21,12 +20,12 @@ function ProductCard({ product, onAddToCart }) {
 
             {/* Wishlist button */}
             <button
-            onClick={() => setLiked(!liked)}
+            onClick={() => onToggleWishlist(product.id)}
             aria-label="Add to wishlist"
             className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg shadow"
             >
-                <span className={liked ? "text-red-500" : "text-stone-400"}>
-                    {liked ? "♥" : "♡"}
+                <span className={isLiked ? "text-red-500" : "text-stone-400"}>
+                    {isLiked ? "♥" : "♡"}
                 </span>
             </button>
       </div>
