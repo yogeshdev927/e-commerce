@@ -10,7 +10,7 @@ const navLinks = [
   { id: 6, label: "Sale", dropdown: false },
 ];
 
-function Navbar({cartCount, wishlistCount}) {
+function Navbar({cartCount, wishlistCount, onCartClick}) {
   const [active, setActive] = useState("New Arrivals")
   const [menuOpen, setMenuOpen] = useState(false)
   return (
@@ -76,7 +76,7 @@ function Navbar({cartCount, wishlistCount}) {
               )}
             </button>
             {/* Bag */}
-            <button aria-label="Shopping bag" className="relative text-stone-700">
+            <button onClick={onCartClick} aria-label="Shopping bag" className="relative text-stone-700">
               <ShoppingBag size={18} />
               {cartCount > 0 &&(
                 <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-orange-500 text-[9px] font-semibold text-white">

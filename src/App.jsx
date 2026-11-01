@@ -10,14 +10,25 @@ import Reviews from './components/Reviews'
 import Gallery from './components/Gallery'
 import Newsletter from './components/Newsletter'
 import Footer from './components/Footer'
+import CartDrawer from './components/CartDrawer'
 
 const App = () => {
   // Cart ka count yahan rakha hai, kyunki Navbar AUR Products dono ko isse kaam hai
-  const [cartCount, setCartCount] = useState(0);
+  const [cartItems, setCartItems] = useState([])
+  const [isCartOpen, setIsCartOpen] = useState(false)
 
-  const handleAddToCart = () => {
-    setCartCount((prev) => prev+1);
+  const handleAddToCart = (product) => {
+    setCartItems((prev) => {
+      const exists = prev.some((item) => item.id === product.id)
+
+      if(exists){
+        return prev.map((item) =>
+        item.id === product.id ? {...item, quantity: item.quantity+1} : item );
+      }
+      return [...prev, {...product, quantity: 1}]
+    });
   };
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
    // ---------- Wishlist ----------
   // Yahan sirf un products ki id rakhte hain jo like kiye hain
@@ -29,10 +40,10 @@ const App = () => {
       :[...prev, productId]// nahi hai -> jod do
     )
   }
-  console.log("App render, wishlist =", wishlist);
+
   return (
     <>
-    <Navbar cartCount={cartCount} wishlistCount={wishlist.length} />
+    <Navbar cartCount={cartCount} wishlistCount={wishlist.length} onCartClick = {() => setIsCartOpen(true)} />
     <Hero />
     <Categories />
     <Product onAddToCart={handleAddToCart} wishlist={wishlist} onToggleWishlist={handleToggleWishlist} />
@@ -43,6 +54,7 @@ const App = () => {
     <Gallery />
     <Newsletter />
     <Footer />
+    <CartDrawer isOpen = {isCartOpen} onClose = {() => setIsCartOpen(false)} items = {cartItems} />
     </>
   )
 }

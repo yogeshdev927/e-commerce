@@ -49,7 +49,7 @@ function ProductCard({ product, onAddToCart, isLiked, onToggleWishlist }) {
                     </span>
                 )}
           </div>
-          <button onClick={onAddToCart} className="rounded-md bg-stone-900 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-stone-700">
+          <button onClick={() => onAddToCart(product)} className="rounded-md bg-stone-900 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-stone-700">
             Add to Bag
           </button>
         </div>
