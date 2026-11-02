@@ -28,8 +28,20 @@ const App = () => {
       return [...prev, {...product, quantity: 1}]
     });
   };
+
+  const handleRemoveFromCart = (id) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const handleChangeQuantity = (id, change) => {
+    setCartItems ((prev) => prev.map((item) => item.id === id ? {...item, quantity: item.quantity + change} : item)
+    .filter((item) => item.quantity > 0)
+  );
+  };
+
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
+  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
    // ---------- Wishlist ----------
   // Yahan sirf un products ki id rakhte hain jo like kiye hain
   const [wishlist, setWishlist] = useState([])
@@ -54,7 +66,7 @@ const App = () => {
     <Gallery />
     <Newsletter />
     <Footer />
-    <CartDrawer isOpen = {isCartOpen} onClose = {() => setIsCartOpen(false)} items = {cartItems} />
+    <CartDrawer isOpen = {isCartOpen} onClose = {() => setIsCartOpen(false)} items = {cartItems} onRemove = {handleRemoveFromCart} onChangeQuantity = {handleChangeQuantity} subtotal = {subtotal} />
     </>
   )
 }
